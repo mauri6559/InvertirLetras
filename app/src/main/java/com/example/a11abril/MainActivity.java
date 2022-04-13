@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     //atributos-variables
-    private TextView txtResultado;
+    private TextView txtResultado, txtVerificar;
     private EditText etPalabra;
     private Button btnProcesar;
 
@@ -53,10 +53,19 @@ public class MainActivity extends AppCompatActivity {
         //la idea es que traten la cadena strind como si fuera un array donde cada cadena esta en una posicion del array partiendo desde cero
         //para tal efecto los strings tienen un efecto que les permiten devolver un caracter de una posicion como si fuera un array
         //el metodo se llama charat(indice)
+
         for (int i  = this.palabra.length() - 1; i >= 0 ; i--){
             invertido = invertido + this.palabra.charAt(i); //invertido += this.palabra.charAt(i);
         }
         txtResultado.setText(invertido);
+
+        if(this.palabra.equals(invertido)){
+            txtVerificar.setText("es palindromo");
+        }
+        else{
+            txtVerificar.setText("no es palindromo");
+        }
+
     }
 
     private void recibirInformacion() {
@@ -65,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void inicializarVistas() {
         txtResultado = findViewById(R.id.txtResultado);
+        txtVerificar = findViewById(R.id.txtVerificar);
         etPalabra = findViewById(R.id.etPalabra);
         etPalabra = findViewById(R.id.etPalabra);
         btnProcesar = findViewById(R.id.btnProcesar);
