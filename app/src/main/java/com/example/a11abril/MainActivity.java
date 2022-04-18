@@ -7,15 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     //atributos-variables
     private TextView txtResultado, txtVerificar;
     private EditText etPalabra;
-    private Button btnProcesar;
+    private Button btnProcesar, btnMensaje;
 
     private String palabra;
+    private String invertido = "";
 
     //metodos - funciones
 
@@ -41,15 +43,50 @@ public class MainActivity extends AppCompatActivity {
                 //Este metodo onclick solo existe en el ambito del boton btnProcesar, lo que se haga a ca solo sirve para ese boton
                 recibirInformacion();
                 invertirPalabra();
+                Verificar();
             }
         });
+        btnMensaje.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarMensaje();
+            }
+        });
+    }
+
+    private void Verificar() {
+        //equals verifica si la caden
+        if(this.palabra.equals(invertido)){
+            txtVerificar.setText("es palindromo");
+        }
+        else{
+            txtVerificar.setText("no es palindromo");
+        }
+    }
+
+
+    private void mostrarMensaje() {
+        //Para mostrar mensajes en pantalla, ustedes pueden usar una ventana emergente temporal llamada tost que basicamente sirve
+        //para mostrar informacion al usuario acerca de cuertos procesos que hayan pasado confirmaciones, mostrar algun mesaje y
+        //estatico || en los estaticos no se puede instanciar
+        /*
+        el toast tiene un metodo llamado makeText donde vamos a configurar lo que
+        le vamos a mostrar, para ello deben pasar estos parametros
+         - contexto (ambito) de la pantalla donde se va a dibujar ese mesaje
+         - cadena de caracteres: el mesaje a mostrar.
+         - una constante de duracion del mensaje en pantalle para que durea mas o menos
+         Finalmente deben decirle al toast  que se meustre con es configuracion y para ello usan el metodo o evento .show()
+         */
+        //cuando s constante todo esta definido en mayusculas
+        Toast.makeText(this, "Hola mundo", Toast.LENGTH_SHORT).show();
+
     }
 
     private void invertirPalabra() {
         //Una anera directa de inveritr una cadena
         //Netamente codigo java
         //palabra = new StringBuilder(palabra).reverse().toString();
-        String invertido = "";
+
         //la idea es que traten la cadena strind como si fuera un array donde cada cadena esta en una posicion del array partiendo desde cero
         //para tal efecto los strings tienen un efecto que les permiten devolver un caracter de una posicion como si fuera un array
         //el metodo se llama charat(indice)
@@ -59,14 +96,10 @@ public class MainActivity extends AppCompatActivity {
         }
         txtResultado.setText(invertido);
 
-        if(this.palabra.equals(invertido)){
-            txtVerificar.setText("es palindromo");
-        }
-        else{
-            txtVerificar.setText("no es palindromo");
-        }
+
 
     }
+
 
     private void recibirInformacion() {
         palabra = etPalabra.getText().toString();
@@ -78,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         etPalabra = findViewById(R.id.etPalabra);
         etPalabra = findViewById(R.id.etPalabra);
         btnProcesar = findViewById(R.id.btnProcesar);
+        btnMensaje = findViewById(R.id.btnMensaje);
     }
 
 
